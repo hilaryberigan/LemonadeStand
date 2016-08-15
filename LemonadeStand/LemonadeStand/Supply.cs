@@ -8,11 +8,11 @@ namespace LemonadeStand
 {
     class Supply
     {
-        decimal price;
+        double price;
         int totalNumber;
         string type;
 
-        public Supply(string type, decimal price)
+        public Supply(string type, double price)
         {
             this.type = type;
             this.price = price;
@@ -23,7 +23,19 @@ namespace LemonadeStand
         {
             return this.type;
         }
-        public 
+        public double GetPrice()
+        {
+            return this.price;
+        }
 
+        public int GetTotalNumber()
+        {
+            return this.totalNumber;
+        }
+        
+        //public void ChangeTotalNumber()
+        //{
+        //    totalNumber + //pull in from user input
+        //}
     }
 }

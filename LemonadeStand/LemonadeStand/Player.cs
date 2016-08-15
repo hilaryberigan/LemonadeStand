@@ -9,15 +9,19 @@ namespace LemonadeStand
     class Player
     {
         string name;
-        decimal totalDollars;
+        double totalDollars;
         int score;
 
-        public Player(string name, decimal totalDollars)
+        public Player(double totalDollars)
         {
-            this.name = name;
             this.totalDollars = totalDollars;
+            this.score = 0;
         }
-
+        public void SetName()
+        {
+            Console.WriteLine("Please enter player name:");
+            this.name =  Console.ReadLine();
+        }
         public string GetName()
         {
             return name;
@@ -31,14 +35,23 @@ namespace LemonadeStand
         {
             score++;
         }
-        public decimal GetTotalDollars()
+        public double GetTotalDollars()
         {
             return totalDollars;
         }
-
-        public void ChangeTotalDollars()
+        public void BuySupply(Supply supply)
         {
-            totalDollars + //pull in price of supplies supplyName.GetPrice
+            Console.WriteLine("Enter total ")
+            supply.GetPrice
         }
+        
+
+        //public void ChangeTotalDollars()
+        //{
+        //    totalDollars + //pull in price of supplies supplyName.GetPrice
+        //}
+
+        
+
     }
 }
