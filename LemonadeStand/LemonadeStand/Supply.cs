@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Supply
+    public class Supply
     {
         double price;
-        int totalNumber;
+        double totalNumber;
         string type;
+        public double cost;
 
         public Supply(string type, double price)
         {
@@ -28,14 +29,21 @@ namespace LemonadeStand
             return this.price;
         }
 
-        public int GetTotalNumber()
+        public double GetTotalNumber()
         {
             return this.totalNumber;
         }
-        
-        //public void ChangeTotalNumber()
-        //{
-        //    totalNumber + //pull in from user input
-        //}
+        public double SetSupplyTotal()
+        {
+            Console.WriteLine("How many " + GetType() + " do you want to buy?");
+            double numberOfSupplies = Convert.ToDouble(Console.ReadLine());
+            this.totalNumber = this.totalNumber + numberOfSupplies;
+            cost = totalNumber * price;
+            return cost;
+
+        }
     }
-}
+        }
+
+    
+

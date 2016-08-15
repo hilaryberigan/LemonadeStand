@@ -28,12 +28,7 @@ namespace LemonadeStand
             skyType = skyTypes[random.Next(0, 4)];
             return skyType;
         }
-        public void GetWeather()
-        {
-            Console.WriteLine("Today's weather: ");
-            Console.WriteLine(SetSkyType());
-            Console.WriteLine(SetTempurature() + " degrees F");
-        }
+       
 
     }
             

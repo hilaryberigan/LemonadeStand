@@ -9,14 +9,7 @@ namespace LemonadeStand
     class Player
     {
         string name;
-        double totalDollars;
-        int score;
 
-        public Player(double totalDollars)
-        {
-            this.totalDollars = totalDollars;
-            this.score = 0;
-        }
         public void SetName()
         {
             Console.WriteLine("Please enter player name:");
@@ -26,24 +19,10 @@ namespace LemonadeStand
         {
             return name;
         }
-        public int GetScore()
-        {
-            return score;
-        }
+
+
         
-        public void AddOneToScore()
-        {
-            score++;
-        }
-        public double GetTotalDollars()
-        {
-            return totalDollars;
-        }
-        public void BuySupply(Supply supply)
-        {
-            Console.WriteLine("Enter total ")
-            supply.GetPrice
-        }
+        
         
 
         //public void ChangeTotalDollars()
