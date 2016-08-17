@@ -9,38 +9,21 @@ namespace LemonadeStand
     class Game
     {
         Player player = new Player();
-        Inventory inventory = new Inventory(30);
         Day day = new Day();
-
-        public Game()
-        {
-
-        }
+        
+       
         public void RunGameOpening()
         {
             Console.WriteLine("Welcome to Lemonade Stand!\n");
             GetGameRules();
-            inventory.GetPriceList();
         }
         public void RunGame()
         {
-            day.GetWeatherForecast();
-            Console.WriteLine("\n");
-            inventory.SetSupplyTotals();
-            Console.WriteLine("\nOkay, let's move on.\n");
-            inventory.GetInventory();
-
-            day.GoToNextDay();
-
+            day.SetUpDay();
+            day.RunDay();
+            //GoToNextDay();
             player.SetName();
-
         }
-
-        //public void BuySupplies()
-        //{
-        //    inventory.SetSupplyTotals();
-
-        //}
         
         public void GetGameRules()
         {

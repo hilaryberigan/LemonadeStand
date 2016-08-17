@@ -21,19 +21,21 @@ namespace LemonadeStand
         }
         public void GetInventory()
         {
-            Console.WriteLine(lemons.GetType() + " : " + lemons.GetTotalNumber());
-            Console.WriteLine(sugar.GetType() + " : " + sugar.GetTotalNumber());
-            Console.WriteLine(ice.GetType() + " : " + ice.GetTotalNumber());
-            Console.WriteLine(cups.GetType() + " : " + cups.GetTotalNumber());
+            Console.WriteLine("\t" + lemons.GetType() + " : \t" + lemons.GetTotalNumber());
+            Console.WriteLine("\t" + sugar.GetType() + " : \t" + sugar.GetTotalNumber());
+            Console.WriteLine("\t" + ice.GetType() + " : \t" + ice.GetTotalNumber());
+            Console.WriteLine("\t" + cups.GetType() + " : \t" + cups.GetTotalNumber() + "\n");
             GetNumberOfPitchers();
         }
         public void GetPriceList()
         {
             Console.WriteLine("\nSupply Price List:\n");
+            Console.WriteLine("------------------------------------");
             Console.WriteLine("price per lemon:\t\t\t $" + lemons.GetPrice());
             Console.WriteLine("price per cup of sugar:\t\t\t $" + sugar.GetPrice());
             Console.WriteLine("price per bag of ice (25 cubes):\t $" + ice.GetPrice());
             Console.WriteLine("price per sleeve of cups (10 cups):\t $" + cups.GetPrice());
+            Console.WriteLine("------------------------------------");
         }
         public void SetSupplyTotals()
         {
@@ -64,8 +66,8 @@ namespace LemonadeStand
         }
         public void GetRemainingDollars()
         {
-            totalDollars = totalDollars - this.cost;
-            Console.WriteLine("Remaining Funds: $" + totalDollars + "\n");
+            totalDollars = totalDollars - cost;
+            Console.WriteLine("\nRemaining Funds: $" + totalDollars + "\n");
         }
 
         public void GetNumberOfPitchers()
@@ -73,11 +75,11 @@ namespace LemonadeStand
             if (sugar.GetTotalNumber() > 3)
             {
                 numberOfPitchers = Math.Floor(sugar.GetTotalNumber() / 4);
-                Console.WriteLine("\nNumber of Pitchers: " + numberOfPitchers);
+                Console.WriteLine("\n\tNumber of Possible Pitchers: " + numberOfPitchers + "\n");
             }
             else
             {
-                Console.WriteLine("\nNumber of Pitchers: SOLD OUT");
+                Console.WriteLine("\nNumber of Pitchers: SOLD OUT\n");
             }
         }
 

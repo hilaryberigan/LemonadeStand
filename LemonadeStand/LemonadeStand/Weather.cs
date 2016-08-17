@@ -9,26 +9,80 @@ namespace LemonadeStand
     class Weather
     {
         string skyType;
-        int tempurature;
+        int temperature;
+        string actualSkyType;
+        int actualtemperature;
         Random random = new Random();
-        public int SetTempurature()
+        List<string> skyTypes = new List<string>();
+        public void Settemperature()
         {
-            tempurature = random.Next(50, 95);
-            return tempurature;
+            temperature = random.Next(50, 95);
         }
-        public string SetSkyType()
-        {
-            List<string> skyTypes = new List<string>();
-            skyTypes.Add("cloudy");
-            skyTypes.Add("overcast");
-            skyTypes.Add("sunny");
-            skyTypes.Add("mostly sunny");
-            skyTypes.Add("rainy");
 
-            skyType = skyTypes[random.Next(0, 4)];
+        public int Gettemperature()
+        {
+            return temperature;
+        }
+        public void SetSkyType()
+        {
+            
+            skyTypes.Add("rainy");
+            skyTypes.Add("cloudy");
+            skyTypes.Add("sunny");
+
+
+            skyType = skyTypes[random.Next(0, 2)];
+        }
+        public string GetSkyType()
+        {
+            SetSkyType();
             return skyType;
         }
-       
+
+        public void SetActualSkyType()
+        {
+            if (random.Next(100) < 20)
+            {
+                actualSkyType = skyTypes[random.Next(0, 2)];
+            }
+            else
+            {
+                actualSkyType = skyType;
+            }
+        }
+        public string GetActualSkyType()
+        {
+            return actualSkyType;
+        }
+        public void SetActualTemperature()
+        {
+            int randomNumber = random.Next(100);
+
+            if (randomNumber < 20)
+            {
+                actualtemperature = temperature + random.Next(1, 5);
+            }
+            else if (randomNumber > 80)
+            {
+                actualtemperature = temperature - random.Next(1, 5);
+            }
+            else
+            {
+                actualtemperature = temperature;                
+            }
+        }
+        public int GetActualTemperature()
+        {
+            return actualtemperature;
+        }
+
+        public void GetMaxCustomers()
+        {
+           if (actualtemperature <= 60 && skyType == "rainy")
+            {
+
+            }
+        }
 
     }
             
