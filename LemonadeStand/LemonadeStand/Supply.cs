@@ -8,40 +8,53 @@ namespace LemonadeStand
 {
     public class Supply
     {
-        double price;
-        double totalNumber;
-        string type;
-        public double cost;
+        protected double price;
+        protected double totalNumberOfSupply;
+        protected string type;
+        protected string measure;
+        public double costOfTotalSupply;
+        protected double numberOfSupplyBought;
 
-        public Supply(string type, double price)
+        public Supply()
         {
-            this.type = type;
-            this.price = price;
-            totalNumber = 0;
+            totalNumberOfSupply = 0;
         }
 
-        public string GetType()
+        public string GetMeasure()
         {
-            return this.type;
+            return this.measure;
         }
-        public double GetPrice()
+        public void GetType()
         {
-            return this.price;
+            Console.WriteLine("\t" + type + " : \t" + totalNumberOfSupply);
+        }
+        public virtual void GetPrice()
+        {
+            Console.WriteLine("The price is: " + price);
         }
 
         public double GetTotalNumber()
         {
-            return this.totalNumber;
+            return this.totalNumberOfSupply;
         }
-        public double SetSupplyTotal()
+        public virtual void SetSupplyTotals()
         {
-            Console.WriteLine("How many " + GetType() + " do you want to buy?");
-            double numberOfSupplies = Convert.ToDouble(Console.ReadLine());
-            this.totalNumber = this.totalNumber + numberOfSupplies;
-            cost = totalNumber * price;
-            return cost;
-
+            Console.WriteLine("How many " + GetMeasure() + " do you want to buy?");
+            numberOfSupplyBought = Convert.ToDouble(Console.ReadLine());
+            this.totalNumberOfSupply = this.totalNumberOfSupply + numberOfSupplyBought;
         }
+        public virtual double GetTotalCostOfSupply()
+        {
+            costOfTotalSupply = numberOfSupplyBought * price;
+            return costOfTotalSupply;
+        }
+        public void BuySupplies()
+        {
+            SetSupplyTotals();
+            costOfTotalSupply = GetTotalCostOfSupply();
+        }
+        
+
     }
         }
 

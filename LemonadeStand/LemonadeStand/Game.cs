@@ -8,7 +8,7 @@ namespace LemonadeStand
 {
     class Game
     {
-        Player player = new Player();
+        Stand stand = new Stand(20);
         Day day = new Day();
         
        
@@ -16,13 +16,15 @@ namespace LemonadeStand
         {
             Console.WriteLine("Welcome to Lemonade Stand!\n");
             GetGameRules();
+            stand.SetName();
         }
         public void RunGame()
         {
             day.SetUpDay();
             day.RunDay();
+
             //GoToNextDay();
-            player.SetName();
+            
         }
         
         public void GetGameRules()

@@ -8,67 +8,36 @@ namespace LemonadeStand
 {
     class Inventory
     {
-        Supply lemons = new Supply("lemons", 0.05);
-        Supply sugar = new Supply("cups of sugar", 0.05);
-        Supply ice = new Supply("bags of ice", 0.50);
-        Supply cups = new Supply("sleeves of cups", 0.25);
-        double totalDollars;
-        double cost;
+        Lemons lemons = new Lemons();
+        Sugar sugar = new Sugar();
+        Supply ice = new Ice();
+        Supply cups = new Cups();
+       
         double numberOfPitchers;
-        public Inventory(double totalDollars)
+       
+        public Inventory()
         {
-            this.totalDollars = totalDollars;
+             
         }
-        public void GetInventory()
+        public void MakeInventory()
         {
-            Console.WriteLine("\t" + lemons.GetType() + " : \t" + lemons.GetTotalNumber());
-            Console.WriteLine("\t" + sugar.GetType() + " : \t" + sugar.GetTotalNumber());
-            Console.WriteLine("\t" + ice.GetType() + " : \t" + ice.GetTotalNumber());
-            Console.WriteLine("\t" + cups.GetType() + " : \t" + cups.GetTotalNumber() + "\n");
+            lemons.GetType();
+            sugar.GetType();
+            ice.GetType();
+            cups.GetType();
             GetNumberOfPitchers();
         }
         public void GetPriceList()
         {
             Console.WriteLine("\nSupply Price List:\n");
             Console.WriteLine("------------------------------------");
-            Console.WriteLine("price per lemon:\t\t\t $" + lemons.GetPrice());
-            Console.WriteLine("price per cup of sugar:\t\t\t $" + sugar.GetPrice());
-            Console.WriteLine("price per bag of ice (25 cubes):\t $" + ice.GetPrice());
-            Console.WriteLine("price per sleeve of cups (10 cups):\t $" + cups.GetPrice());
+            lemons.GetPrice();
+            sugar.GetPrice();
+            ice.GetPrice();     
+            cups.GetPrice();
             Console.WriteLine("------------------------------------");
         }
-        public void SetSupplyTotals()
-        {
-            SetLemonTotals();
-            SetSugarTotals();
-            SetIceTotals();
-            SetCupsTotal();
-        }
-        public void SetLemonTotals()
-        {
-            cost = lemons.SetSupplyTotal();
-            GetRemainingDollars();
-        }
-        public void SetSugarTotals()
-        {
-            cost = sugar.SetSupplyTotal();
-            GetRemainingDollars();
-        }
-        public void SetIceTotals()
-        {
-            cost = ice.SetSupplyTotal();
-            GetRemainingDollars();
-        }
-        public void SetCupsTotal()
-        {
-            cost = cups.SetSupplyTotal();
-            GetRemainingDollars();
-        }
-        public void GetRemainingDollars()
-        {
-            totalDollars = totalDollars - cost;
-            Console.WriteLine("\nRemaining Funds: $" + totalDollars + "\n");
-        }
+
 
         public void GetNumberOfPitchers()
         {
@@ -82,8 +51,17 @@ namespace LemonadeStand
                 Console.WriteLine("\nNumber of Pitchers: SOLD OUT\n");
             }
         }
-
+        public void BuyAllSupplies()
+        {
+            GetPriceList();
+            lemons.BuySupplies();
+            sugar.BuySupplies();
+            ice.BuySupplies();
+            cups.BuySupplies();
+        }
+    }
+        
         }
 
-    }
+    
 

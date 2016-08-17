@@ -12,10 +12,15 @@ namespace LemonadeStand
         int dayNumber;
         Weather weather = new Weather();
         Random random = new Random();
-        Inventory inventory = new Inventory(30);
+        Stand stand = new Stand(20);
+        Lemons lemons;
+        Sugar sugar;
+        Ice ice;
+        Cups cups;
+
 
         int maxCustomers;
-        public decimal cupPrice;
+       
 
         public Day()
         {
@@ -26,16 +31,12 @@ namespace LemonadeStand
         public int SetMaxCustomers()
         {
             int actualtemperature = weather.GetActualTemperature();
-            maxCustomers = maxCustomers + (actualtemperature - maxCustomers);
+            maxCustomers = maxCustomers + ((actualtemperature - maxCustomers)*2);
             return maxCustomers; 
         }
         public void SetUpDay()
         {
             GetWeatherForecast();
-            inventory.GetPriceList();
-            inventory.SetSupplyTotals();
-            inventory.GetInventory();
-            SetCupPrice();
             Console.WriteLine("\nOkay, let's move on.\n{Enter}");
             Console.ReadLine();
             Console.Clear();
