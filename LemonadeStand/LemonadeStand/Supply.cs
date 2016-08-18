@@ -8,12 +8,12 @@ namespace LemonadeStand
 {
     public class Supply
     {
-        protected double price;
-        protected double totalNumberOfSupply;
+        protected decimal price;
+        protected decimal totalNumberOfSupply;
         protected string type;
         protected string measure;
-        public double costOfTotalSupply;
-        protected double numberOfSupplyBought;
+        public decimal costOfTotalSupply;
+        protected decimal numberOfSupplyBought;
 
         public Supply()
         {
@@ -33,22 +33,22 @@ namespace LemonadeStand
             Console.WriteLine("The price is: " + price);
         }
 
-        public double GetTotalNumber()
+        public decimal GetTotalNumber()
         {
             return this.totalNumberOfSupply;
         }
         public virtual void SetSupplyTotals()
         {
             Console.WriteLine("\nHow many " + GetMeasure() + " do you want to buy?");
-            numberOfSupplyBought = Convert.ToDouble(Console.ReadLine());
+            numberOfSupplyBought = Convert.ToDecimal(Console.ReadLine());
             this.totalNumberOfSupply = this.totalNumberOfSupply + numberOfSupplyBought;
         }
-        public virtual double GetTotalCostOfSupply()
+        public virtual decimal GetTotalCostOfSupply()
         {
             costOfTotalSupply = numberOfSupplyBought * price;
             return costOfTotalSupply;
         }
-        public double BuySupplies()
+        public decimal BuySupplies()
         {
             SetSupplyTotals();
             costOfTotalSupply = GetTotalCostOfSupply();

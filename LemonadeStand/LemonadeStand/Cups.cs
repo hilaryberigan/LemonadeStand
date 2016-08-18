@@ -12,7 +12,7 @@ namespace LemonadeStand
         public Cups()
         {
             type = "cups";
-            price = .50;
+            price = .50m;
             measure = "sleeve of cups";
 
         }
@@ -23,10 +23,10 @@ namespace LemonadeStand
         public override void SetSupplyTotals()
         {
             Console.WriteLine("How many " + measure + " do you want to buy?");
-            numberOfSupplyBought = Convert.ToDouble(Console.ReadLine());
+            numberOfSupplyBought = Convert.ToDecimal(Console.ReadLine());
             this.totalNumberOfSupply = this.totalNumberOfSupply + (numberOfSupplyBought * numberCupsPerSleeve);
         }
-        public override double GetTotalCostOfSupply()
+        public override decimal GetTotalCostOfSupply()
         { 
             costOfTotalSupply = numberOfSupplyBought * price;
             return costOfTotalSupply;

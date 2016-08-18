@@ -15,6 +15,8 @@ namespace LemonadeStand
         int maxCustomers = 45;
         int dayNumber = 1;
         public decimal cupPrice;
+        int numberGlassesBought = 0;
+        public decimal dailyDollarsEarned;
    
         public Day()
         {
@@ -26,7 +28,7 @@ namespace LemonadeStand
         public int SetMaxCustomers()
         {
             int actualtemperature = weather.GetActualTemperature();
-            maxCustomers = maxCustomers + ((actualtemperature - maxCustomers)*2);
+            maxCustomers = maxCustomers + ((actualtemperature - maxCustomers) * 2);
             return maxCustomers; //add something with skytype
         }
 
@@ -42,13 +44,38 @@ namespace LemonadeStand
             }
         }
 
+        public void SetGlassesBought()
+        {
+            foreach (Customer customer in customers)
+            {
+                if (customer.boughtGlass)
+                {
+                    numberGlassesBought++;
+                }
+            }
+        }
+        public int GetGlassesBought()
+        {
+            return numberGlassesBought;
+        }
+        public decimal GetTotalEarned()
+        {
+            dailyDollarsEarned = (decimal)numberGlassesBought * cupPrice;
+            return dailyDollarsEarned;
+        }
+        public void GiveFinalNumbers()
+        {
+            GetTotalEarned();
+            Console.WriteLine("Today you sold {0} glasses of lemonade!", numberGlassesBought);
+            Console.WriteLine("Total $ earned: " + dailyDollarsEarned);
+        }
         public void RunDay()
         {
-            
-           
-               
-            }
-            
+            SetUpForDay();
+            MakeCustomers();
+            SetGlassesBought();
+            GiveFinalNumbers();
+        }
 
         public int GetMaxCustomers()
         {

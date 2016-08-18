@@ -14,18 +14,15 @@ namespace LemonadeStand
         int weatherIndicator;
         decimal priceWillingToPay;
         int maxTemperature = 100;
-        bool boughtGlass;
+        public bool boughtGlass;
 
         Random random = new Random();
 
         public Customer(Weather weather, decimal price)
         {
-            SetPreferences(price, weather.GetActualTemperature(), weather.GetActualSkyType());
             personalThirst = random.Next(100);
             weatherIndicator = 0;
-            
-
-
+            SetPreferences(price, weather.GetActualTemperature(), weather.GetActualSkyType());
         }
   
         public void SetPersonalThirst(int actualTemperature)
@@ -41,8 +38,8 @@ namespace LemonadeStand
         }
         public void SetWillPay(int actualTemperature, decimal price)
         {
-            int minPriceWillingToPay = random.Next(0, 5);
-            priceWillingToPay = ((decimal)actualTemperature / (decimal)maxTemperature) + (decimal)minPriceWillingToPay;
+            int minPriceWillingToPay = random.Next(1, 5);
+            priceWillingToPay = ((decimal)actualTemperature / (decimal)maxTemperature) * (decimal)minPriceWillingToPay;
            
 
             if (priceWillingToPay >= price)
@@ -60,15 +57,15 @@ namespace LemonadeStand
             
             if (actualSkyType == "sunny")
             {
-               weatherIndicator = weatherIndicator + 50;
+               weatherIndicator = weatherIndicator + 60;
             }
             if (actualSkyType == "cloudy")
             {
-                weatherIndicator = weatherIndicator + 20;
+                weatherIndicator = weatherIndicator + 40;
             }
             if (actualSkyType == "rainy")
             {
-                weatherIndicator = weatherIndicator + 5;
+                weatherIndicator = weatherIndicator + 20;
             }
         }
 

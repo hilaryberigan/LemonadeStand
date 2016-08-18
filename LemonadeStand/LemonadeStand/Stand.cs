@@ -9,15 +9,15 @@ namespace LemonadeStand
     class Stand
     {
         string playerName;
-        double bank;
-        double costOfSupply;
-        double numberOfPitchers;
+        public decimal bank;
+        decimal costOfSupply;
+        decimal numberOfPitchers;
         Lemons lemons = new Lemons();
         Sugar sugar = new Sugar();
         Ice ice = new Ice();
         Cups cups = new Cups();
 
-        public Stand(double bank)
+        public Stand(decimal bank)
         {
             this.bank = bank;
         }
@@ -43,7 +43,7 @@ namespace LemonadeStand
         {
             return playerName;
         }
-       
+
         public void Getbank()
         {
             Console.WriteLine("Total bank: \t $" + bank);
@@ -89,7 +89,7 @@ namespace LemonadeStand
         public void BuyLemons()
         {
             costOfSupply = lemons.BuySupplies();
-            GetRemainingBank();  
+            GetRemainingBank();
         }
         public void BuyIce()
         {
@@ -124,7 +124,9 @@ namespace LemonadeStand
         {
             BuyAllSupplies();
         }
-    }
+    
+        
+}
 
 
 

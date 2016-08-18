@@ -11,7 +11,7 @@ namespace LemonadeStand
         public Lemons()
         {
             type = "lemons";
-            price = 0.05;
+            price = 0.05m;
             measure = "lemons";
         }
         public override void GetPrice()

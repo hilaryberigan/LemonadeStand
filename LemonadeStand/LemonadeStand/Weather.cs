@@ -44,8 +44,7 @@ namespace LemonadeStand
         }
         public string GetSkyTypeForecast()
         {
-            SetSkyTypeForecast();
-            return skyType;
+           return skyType;
         }
 
         public void SetActualSkyType()

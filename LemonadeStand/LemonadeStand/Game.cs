@@ -19,14 +19,30 @@ namespace LemonadeStand
         public void RunGame()
         {
             stand.SetUpStand();
-            day.SetUpForDay();
-            day.MakeCustomers();
-
+            day.RunDay();
+            TransferDailyEarnedToBank();
+            GiveBankUpdate();
 
             //GoToNextDay();
             
         }
-        
+        public void TransferDailyEarnedToBank()
+        {
+           stand.bank = day.dailyDollarsEarned + stand.bank; 
+        }
+        public void GiveBankUpdate()
+        {
+            if (stand.bank > 0)
+            {
+                Console.WriteLine("Congratulations you are still have ${0} in your bank.", stand.bank);
+            }
+            else
+            {
+                Console.WriteLine("You have ${0} in your bank. UH OHHHHHH! You're in the red! \nGAME OVER", stand.bank);
+
+            }
+        }
+
         public void GetGameRules()
         {
             Console.WriteLine("\nYou're goal is to make as much money as you can in one week by selling lemonade at your lemonade stand. \nGame Instructions:\n");

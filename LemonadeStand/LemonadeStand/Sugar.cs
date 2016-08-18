@@ -11,7 +11,7 @@ namespace LemonadeStand
         public Sugar()
         {
             type = "sugar";
-            price = 0.05;
+            price = 0.05m;
             measure = "cups of sugar";
         }
         public override void GetPrice()
