@@ -10,13 +10,14 @@ namespace LemonadeStand
     {
         public Sugar()
         {
-            type = "sugar";
-            price = 0.05m;
+            type = "cups of sugar";
+            price = 0.25m;
             measure = "cups of sugar";
+            numberPerPitcher = 4;
         }
         public override void GetPrice()
         {
-            Console.WriteLine("price per cup of sugar:\t $" + price);
+            Console.WriteLine("price per cup of sugar:\t\t $" + price);
         }
     }
 }

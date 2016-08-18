@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LemonadeStand
@@ -9,27 +10,47 @@ namespace LemonadeStand
     class Game
     {
         Stand stand = new Stand(20);
-        Day day = new Day();
+        int maxDays = 2;
         public void RunGameOpening()
         {
             Console.WriteLine("Welcome to Lemonade Stand!\n");
             GetGameRules();
             stand.SetName();
         }
+        List<Day> days = new List<Day>();
         public void RunGame()
         {
-            stand.SetUpStand();
-            day.RunDay();
-            TransferDailyEarnedToBank();
-            GiveBankUpdate();
-
-            //GoToNextDay();
-            
+            for (int i = 0; i < maxDays; i++)
+            { 
+                Day day = new Day();
+                days.Add(day);
+                day.GetWeatherForecast();
+                stand.SetUpStand();
+                stand.GivePlayerInfo();
+                day.RunDay(stand);
+                stand.bank += day.dailyDollarsEarned;
+                GiveBankUpdate();
+                Console.WriteLine("\n\n\n{Enter}");
+                Console.ReadLine();        
+            }       
         }
-        public void TransferDailyEarnedToBank()
+        public void DeterminePlayerStatus()
         {
-           stand.bank = day.dailyDollarsEarned + stand.bank; 
+            Console.Clear();
+            if (stand.bank > 0)
+            {
+                Console.WriteLine("\n\n\nCONGRATULATIONS!!!!\n\n\nYou win with a profit of ${0}.", stand.bank);
+            }
+            else
+            {
+                Console.WriteLine("\n\n\nGAME OVER! You ended with a ${0} loss of funds!", stand.bank);
+            }
         }
+        
+        //public void GetTotalGlasses
+        //public void RunGameEnding();
+        
+        
         public void GiveBankUpdate()
         {
             if (stand.bank > 0)

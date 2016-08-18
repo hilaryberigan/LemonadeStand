@@ -14,7 +14,7 @@ namespace LemonadeStand
         int weatherIndicator;
         decimal priceWillingToPay;
         int maxTemperature = 100;
-        public bool boughtGlass;
+        public bool wantsGlass;
 
         Random random = new Random();
 
@@ -87,14 +87,9 @@ namespace LemonadeStand
 
             if (threshold >= 100)
             {
-                Console.WriteLine("Customer buys lemonade");
-                boughtGlass = true;
+                wantsGlass = true;
             }
-            else
-            {
-                Console.WriteLine("Customer walks by");
-                boughtGlass = false;
-            }
+            
         }
        
         

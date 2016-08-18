@@ -13,7 +13,7 @@ namespace LemonadeStand
             Game game = new Game();
             game.RunGameOpening();
             game.RunGame();
-
+            game.DeterminePlayerStatus();
             Console.ReadLine();
 
 

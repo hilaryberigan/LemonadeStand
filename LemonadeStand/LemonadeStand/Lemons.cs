@@ -11,12 +11,13 @@ namespace LemonadeStand
         public Lemons()
         {
             type = "lemons";
-            price = 0.05m;
+            price = 0.15m;
             measure = "lemons";
+            numberPerPitcher = 5;
         }
         public override void GetPrice()
         {
-            Console.WriteLine("price per lemon:\t $" + price);
+            Console.WriteLine("price per lemon:\t\t\t $" + price);
         }
 
 

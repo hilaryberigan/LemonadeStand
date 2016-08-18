@@ -86,6 +86,6 @@ namespace LemonadeStand
 
     }
             
-//generate actual weather for that day
+
         }
 

@@ -13,8 +13,9 @@ namespace LemonadeStand
         public Ice()
         {
             type = "ice cubes";
-            price = .50m;
+            price = 1m;
             measure = "bags of ice";
+            numberPerPitcher = 20;
         }
         public override void GetPrice()
         {
@@ -23,13 +24,13 @@ namespace LemonadeStand
         public override void SetSupplyTotals()
         {
             Console.WriteLine("How many " + measure + " do you want to buy?");
-            numberOfSupplyBought = Convert.ToDecimal(Console.ReadLine());
+            numberOfSupplyBought = Convert.ToInt32(Console.ReadLine());
             this.totalNumberOfSupply = this.totalNumberOfSupply + (numberOfSupplyBought * numberCubesPerBag);
         }
         public override decimal GetTotalCostOfSupply()
         {
-            costOfTotalSupply = numberOfSupplyBought * price;
-            return costOfTotalSupply;
+            costOfSupply = numberOfSupplyBought * price;
+            return costOfSupply;
         }
     }
     }
