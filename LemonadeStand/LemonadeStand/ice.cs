@@ -9,6 +9,7 @@ namespace LemonadeStand
     class Ice : Supply
     {
         int numberCubesPerBag = 25;
+     
         public Ice()
         {
             type = "ice cubes";
@@ -22,7 +23,7 @@ namespace LemonadeStand
         public override void SetSupplyTotals()
         {
             Console.WriteLine("How many " + measure + " do you want to buy?");
-            double numberOfSupplies = Convert.ToDouble(Console.ReadLine());
+            numberOfSupplyBought = Convert.ToDouble(Console.ReadLine());
             this.totalNumberOfSupply = this.totalNumberOfSupply + (numberOfSupplyBought * numberCubesPerBag);
         }
         public override double GetTotalCostOfSupply()

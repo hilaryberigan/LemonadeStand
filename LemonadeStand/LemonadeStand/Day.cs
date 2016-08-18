@@ -9,68 +9,70 @@ namespace LemonadeStand
 {
     class Day
     {
-        int dayNumber;
-        Weather weather = new Weather();
+        Weather weather;
         Random random = new Random();
-        Stand stand = new Stand(20);
-        Lemons lemons;
-        Sugar sugar;
-        Ice ice;
-        Cups cups;
-
-
-        int maxCustomers;
-       
-
+        
+        int maxCustomers = 45;
+        int dayNumber = 1;
+        public decimal cupPrice;
+   
         public Day()
         {
-            dayNumber = 1;
-            maxCustomers = 45;
-         /*   SetMaxCustomers(); *///will this work with it happening before actual temp?
+            weather = new Weather();
+            SetWeatherForecast();
+            SetMaxCustomers();
+            SetActualWeather();
         }
         public int SetMaxCustomers()
         {
             int actualtemperature = weather.GetActualTemperature();
             maxCustomers = maxCustomers + ((actualtemperature - maxCustomers)*2);
-            return maxCustomers; 
+            return maxCustomers; //add something with skytype
         }
-        public void SetUpDay()
+
+        List<Customer> customers = new List<Customer>();
+
+        public void MakeCustomers()
         {
-            GetWeatherForecast();
-            Console.WriteLine("\nOkay, let's move on.\n{Enter}");
-            Console.ReadLine();
-            Console.Clear();
+            for (int i = 0; i < maxCustomers; i ++)
+            {
+                Customer customer = new Customer(weather, cupPrice);
+                customers.Add(customer);
+                Thread.Sleep(100);
+            }
         }
+
         public void RunDay()
         {
-            maxCustomers = SetMaxCustomers();
-            int customerNumber = 1;
-            while (customerNumber > 0 && customerNumber < (maxCustomers + 1))
-            {
-                Customer customer = new Customer(customerNumber);
-                Thread.Sleep(100);
-                customer.GetPreferences(cupPrice, weather.GetActualTemperature(), weather.GetActualSkyType());
-                customerNumber++;
+            
+           
+               
             }
             
-        }
+
         public int GetMaxCustomers()
         {
             return maxCustomers;
         }
-    public void GetWeatherForecast()
+        public void SetWeatherForecast()
+        {
+            weather.SetTemperatureForecast();
+            weather.SetSkyTypeForecast();
+        }
+        public void GetWeatherForecast()
         {
             Console.WriteLine("\nToday's weather forecast: ");
-            weather.Settemperature();
-            weather.SetSkyType();
-            Console.WriteLine("\t" + weather.GetSkyType());
-            Console.WriteLine("\t" + weather.Gettemperature() + " degrees F\n");
+            Console.WriteLine("\t" + weather.GetSkyTypeForecast());
+            Console.WriteLine("\t" + weather.GettemperatureForecast() + " degrees F\n");
+        }
+        public void SetActualWeather()
+        {
+            weather.SetActualTemperature();
+            weather.SetActualSkyType();
         }
         public void GetActualWeather()
         {
             Console.WriteLine("Today's weather was:");
-            weather.SetActualTemperature();
-            weather.SetActualSkyType();
             Console.WriteLine("\t" + weather.GetActualSkyType());
             Console.WriteLine("\t" + weather.GetActualTemperature() + " degrees F\n");
         }
@@ -83,11 +85,17 @@ namespace LemonadeStand
         {
             dayNumber++;
         }
+        public void SetUpForDay()
+        {
+            SetCupPrice();
+            //MakeLemonade (see how many of each supply and totalout pitchers)
+        }
         public void SetCupPrice()
         {
-            Console.WriteLine("How much will one cup cost?");
+            Console.WriteLine("How much would you like each glass of lemonade to cost?");
             cupPrice = Convert.ToDecimal(Console.ReadLine());
         }
+
     }
 
 }

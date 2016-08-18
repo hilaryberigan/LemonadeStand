@@ -14,16 +14,25 @@ namespace LemonadeStand
         int actualtemperature;
         Random random = new Random();
         List<string> skyTypes = new List<string>();
-        public void Settemperature()
+
+        public Weather()
+        {
+            SetTemperatureForecast();
+            SetSkyTypeForecast();
+            SetActualSkyType();
+            SetActualTemperature();
+        }
+
+        public void SetTemperatureForecast()
         {
             temperature = random.Next(50, 95);
         }
 
-        public int Gettemperature()
+        public int GettemperatureForecast()
         {
             return temperature;
         }
-        public void SetSkyType()
+        public void SetSkyTypeForecast()
         {
             
             skyTypes.Add("rainy");
@@ -33,9 +42,9 @@ namespace LemonadeStand
 
             skyType = skyTypes[random.Next(0, 2)];
         }
-        public string GetSkyType()
+        public string GetSkyTypeForecast()
         {
-            SetSkyType();
+            SetSkyTypeForecast();
             return skyType;
         }
 
@@ -74,14 +83,6 @@ namespace LemonadeStand
         public int GetActualTemperature()
         {
             return actualtemperature;
-        }
-
-        public void GetMaxCustomers()
-        {
-           if (actualtemperature <= 60 && skyType == "rainy")
-            {
-
-            }
         }
 
     }

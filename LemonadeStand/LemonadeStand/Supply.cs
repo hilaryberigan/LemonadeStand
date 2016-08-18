@@ -39,7 +39,7 @@ namespace LemonadeStand
         }
         public virtual void SetSupplyTotals()
         {
-            Console.WriteLine("How many " + GetMeasure() + " do you want to buy?");
+            Console.WriteLine("\nHow many " + GetMeasure() + " do you want to buy?");
             numberOfSupplyBought = Convert.ToDouble(Console.ReadLine());
             this.totalNumberOfSupply = this.totalNumberOfSupply + numberOfSupplyBought;
         }
@@ -48,10 +48,11 @@ namespace LemonadeStand
             costOfTotalSupply = numberOfSupplyBought * price;
             return costOfTotalSupply;
         }
-        public void BuySupplies()
+        public double BuySupplies()
         {
             SetSupplyTotals();
             costOfTotalSupply = GetTotalCostOfSupply();
+            return costOfTotalSupply;
         }
         
 

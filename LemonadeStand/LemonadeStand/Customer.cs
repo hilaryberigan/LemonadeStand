@@ -8,33 +8,31 @@ namespace LemonadeStand
 {
     class Customer
     {
-        int customerNumber;
         int personalThirst;
         bool willPay;
         int threshold;
         int weatherIndicator;
         decimal priceWillingToPay;
-        int maxTemperature;
+        int maxTemperature = 100;
         bool boughtGlass;
 
         Random random = new Random();
 
-        public Customer(int customerNumber)
+        public Customer(Weather weather, decimal price)
         {
+            SetPreferences(price, weather.GetActualTemperature(), weather.GetActualSkyType());
             personalThirst = random.Next(100);
-            this.customerNumber = customerNumber;
             weatherIndicator = 0;
-            maxTemperature = 100;
+            
+
+
         }
-        public int GetCustomerNumber()
-        {
-            return customerNumber;
-        }
+  
         public void SetPersonalThirst(int actualTemperature)
         {
             personalThirst = personalThirst + (maxTemperature / actualTemperature);
         }
-        public void GetPreferences(decimal price, int actualTemperature, string actualSkyType)
+        public void SetPreferences(decimal price, int actualTemperature, string actualSkyType)
         {
             SetWillPay(actualTemperature, price);
             SetWeatherIndicator(actualSkyType);
@@ -92,12 +90,12 @@ namespace LemonadeStand
 
             if (threshold >= 100)
             {
-                Console.WriteLine("Customer {0} buys lemonade", customerNumber);
+                Console.WriteLine("Customer buys lemonade");
                 boughtGlass = true;
             }
             else
             {
-                Console.WriteLine("Customer {0} walks by", customerNumber);
+                Console.WriteLine("Customer walks by");
                 boughtGlass = false;
             }
         }

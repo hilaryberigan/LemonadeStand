@@ -10,8 +10,6 @@ namespace LemonadeStand
     {
         Stand stand = new Stand(20);
         Day day = new Day();
-        
-       
         public void RunGameOpening()
         {
             Console.WriteLine("Welcome to Lemonade Stand!\n");
@@ -20,8 +18,10 @@ namespace LemonadeStand
         }
         public void RunGame()
         {
-            day.SetUpDay();
-            day.RunDay();
+            stand.SetUpStand();
+            day.SetUpForDay();
+            day.MakeCustomers();
+
 
             //GoToNextDay();
             

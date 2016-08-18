@@ -23,8 +23,8 @@ namespace LemonadeStand
         public override void SetSupplyTotals()
         {
             Console.WriteLine("How many " + measure + " do you want to buy?");
-            double numberOfSupplies = Convert.ToDouble(Console.ReadLine());
-            this.totalNumberOfSupply = this.totalNumberOfSupply + (numberOfSupplies * numberCupsPerSleeve);
+            numberOfSupplyBought = Convert.ToDouble(Console.ReadLine());
+            this.totalNumberOfSupply = this.totalNumberOfSupply + (numberOfSupplyBought * numberCupsPerSleeve);
         }
         public override double GetTotalCostOfSupply()
         { 
