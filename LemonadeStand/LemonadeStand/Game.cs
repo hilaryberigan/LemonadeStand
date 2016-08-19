@@ -9,7 +9,7 @@ namespace LemonadeStand
 {
     class Game
     {
-        Stand stand = new Stand(20);
+        Stand stand = new Stand();
         int maxDays = 2;
         public void RunGameOpening()
         {
@@ -23,15 +23,15 @@ namespace LemonadeStand
             for (int i = 0; i < maxDays; i++)
             { 
                 Day day = new Day();
-                days.Add(day);
-                day.GetWeatherForecast();
-                stand.SetUpStand();
-                stand.GivePlayerInfo();
-                day.RunDay(stand);
+                days.Add(day);                    
+                day.RunStartOfDay(stand);
+                day.WorkAtStand(stand);
                 stand.bank += day.dailyDollarsEarned;
                 GiveBankUpdate();
                 Console.WriteLine("\n\n\n{Enter}");
-                Console.ReadLine();        
+                Console.ReadLine();
+                stand.GivePlayerInfo();
+
             }       
         }
         public void DeterminePlayerStatus()

@@ -19,7 +19,7 @@ namespace LemonadeStand
         }
         public override void GetPrice()
         {
-            Console.WriteLine("price per bag of ice (25 cubes):\t $" + price);
+            Console.WriteLine("\tprice per bag of ice (25 cubes):\t $" + price);
         }
         public override void SetSupplyTotals()
         {

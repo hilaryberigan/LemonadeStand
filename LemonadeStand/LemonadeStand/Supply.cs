@@ -10,7 +10,7 @@ namespace LemonadeStand
     {
         protected decimal price;
         protected int totalNumberOfSupply;
-        protected string type;
+        public string type;
         protected string measure;
         public decimal costOfSupply;
         protected int numberOfSupplyBought;
@@ -22,11 +22,12 @@ namespace LemonadeStand
             totalNumberOfSupply = 0;
         }
 
+        //'Get' Functions
         public string GetMeasure()
         {
             return this.measure;
         }
-        public void GetType()
+        public void GetTypeAndNumber()
         {
             Console.WriteLine("\t" + type + " : \t\t" + totalNumberOfSupply);
         }
@@ -34,26 +35,19 @@ namespace LemonadeStand
         {
             Console.WriteLine("The price is: " + price);
         }
-
         public decimal GetTotalNumber()
         {
             return this.totalNumberOfSupply;
         }
-        public virtual void SetSupplyTotals()
-        {
-            Console.WriteLine("\nHow many " + GetMeasure() + " do you want to buy?");
-            numberOfSupplyBought = Convert.ToInt32(Console.ReadLine());
-            this.totalNumberOfSupply = this.totalNumberOfSupply + numberOfSupplyBought;
-        }
-        
-
-
         public virtual decimal GetTotalCostOfSupply()
         {
             costOfSupply = numberOfSupplyBought * price;
             return costOfSupply;
         }
-        public void BuySupplies()
+        //
+        //User Interaction with supplies
+        //
+        public void HaveUserBuySupplies()
         {
             SetSupplyTotals();
             if (totalNumberOfSupply < numberPerPitcher)
@@ -67,10 +61,15 @@ namespace LemonadeStand
             }
  
         }
-       
-        public void UseSupply()
+        public virtual void SetSupplyTotals()
         {
-            totalNumberOfSupply -= numberPerPitcher;
+            Console.WriteLine("\nHow many " + GetMeasure() + " do you want to buy?");
+            numberOfSupplyBought = Convert.ToInt32(Console.ReadLine());
+            this.totalNumberOfSupply = this.totalNumberOfSupply + numberOfSupplyBought;
+        }
+        public void UseOneMeasureOfSupply()
+        {
+            totalNumberOfSupply = totalNumberOfSupply - numberPerPitcher;
         }
 
     }

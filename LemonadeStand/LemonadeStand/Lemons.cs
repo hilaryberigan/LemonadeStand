@@ -17,7 +17,7 @@ namespace LemonadeStand
         }
         public override void GetPrice()
         {
-            Console.WriteLine("price per lemon:\t\t\t $" + price);
+            Console.WriteLine("\tprice per lemon:\t\t\t $" + price);
         }
 
 

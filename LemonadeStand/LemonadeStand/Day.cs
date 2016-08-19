@@ -18,39 +18,40 @@ namespace LemonadeStand
         public int dayNumber = 0;
         public decimal dailyDollarsEarned;
         public int numberGlassesBought = 0;
-   
+
         public Day()
         {
             weather = new Weather();
-            SetWeatherForecast();
+            weather.SetWeatherForecast();
+            weather.SetActualWeather();
             SetMaxCustomers();
-            SetActualWeather();
             dayNumber++;
         }
-        public void RunDay(Stand stand)
+
+        //
+        //Large Action Methods
+        //
+        public void RunStartOfDay(Stand stand)
         {
-            SetUpForDay();
+            weather.GetWeatherForecast();
+            stand.ShowRecipe();
+            stand.SetUpStand();
+            stand.TellPlayerPossiblePitchers();
+            weather.GetWeatherForecast();
+
+            MakeCustomers();
+        }
+        public void WorkAtStand(Stand stand)
+        {
+            stand.FillPitchers();
             RevealGlassesBought(stand);
-            GetActualWeather();
+            weather.GetActualWeather();
             GiveFinalNumbers();
+            stand.GivePlayerInfo();
         }
-        public int SetMaxCustomers()
-        {
-            int actualtemperature = weather.GetActualTemperature();
-            maxCustomers = maxCustomers + ((actualtemperature - maxCustomers) * 2);
-            return maxCustomers; //add something with skytype
-        }    
-
-        public void MakeCustomers()
-        {
-            for (int i = 0; i < maxCustomers; i ++)
-            {
-                Customer customer = new Customer(weather, cupPrice);
-                customers.Add(customer);
-                Thread.Sleep(15);
-            }
-        }
-
+        //
+        //RunDay
+        //
         public void RevealGlassesBought(Stand stand)
         {
             foreach (Customer customer in customers)
@@ -71,55 +72,47 @@ namespace LemonadeStand
                 }
             }
         }
-        
-        public decimal GetTotalEarned()
+        public void GiveFinalNumbers()
+        {
+            GetTotalDollarsEarned();
+            Console.WriteLine("Today you sold {0} glasses of lemonade!", numberGlassesBought);
+            Console.WriteLine("Total $ earned: " + dailyDollarsEarned);
+            Console.ReadLine();
+        }
+        public decimal GetTotalDollarsEarned()
         {
             dailyDollarsEarned = (decimal)numberGlassesBought * cupPrice;
             return dailyDollarsEarned;
         }
-        public void GiveFinalNumbers()
-        {
-            GetTotalEarned();
-            Console.WriteLine("Today you sold {0} glasses of lemonade!", numberGlassesBought);
-            Console.WriteLine("Total $ earned: " + dailyDollarsEarned);
-            //addcurrentInventory
-        }
-
-        public void SetWeatherForecast()
-        {
-            weather.SetTemperatureForecast();
-            weather.SetSkyTypeForecast();
-        }
-        public void GetWeatherForecast()
-        {
-            Console.WriteLine("\nToday's weather forecast: \n");
-            Console.WriteLine("\t" + weather.GetSkyTypeForecast());
-            Console.WriteLine("\t" + weather.GettemperatureForecast() + "° F\n");
-        }
-        public void SetActualWeather()
-        {
-            weather.SetActualTemperature();
-            weather.SetActualSkyType();
-        }
-        public void GetActualWeather()
-        {
-            Console.WriteLine("Today's weather was: \n");
-            Console.WriteLine("\t" + weather.GetActualSkyType());
-            Console.WriteLine("\t" + weather.GetActualTemperature() + "° F\n");
-        }
-
-        public void SetUpForDay()
-        {
-            GetWeatherForecast();
-            SetCupPrice();
-            MakeCustomers();
-        }
+        //
+        //Set Up Day in Game
+        //
         public void SetCupPrice()
         {
             Console.WriteLine("How much would you like each glass of lemonade to cost?");
             cupPrice = Convert.ToDecimal(Console.ReadLine());
         }
-        
+        public void MakeCustomers()
+        {
+            for (int i = 0; i < maxCustomers; i++)
+            {
+                Customer customer = new Customer(weather, cupPrice);
+                customers.Add(customer);
+                Thread.Sleep(15);
+            }
+        }
+        //
+        //Behind the scenes set up for each Day
+        //
+        public int SetMaxCustomers()
+        {
+            int actualtemperature = weather.GetActualTemperature();
+            maxCustomers = maxCustomers + ((actualtemperature - maxCustomers) * 2);
+            return maxCustomers; //add something with skytype
+        }
+       
+
+    } 
     }
 
-}
+

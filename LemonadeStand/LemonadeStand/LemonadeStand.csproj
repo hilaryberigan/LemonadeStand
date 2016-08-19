@@ -55,6 +55,7 @@
     <Compile Include="Stand.cs" />
     <Compile Include="Sugar.cs" />
     <Compile Include="Supply.cs" />
+    <Compile Include="UserInterFace.cs" />
     <Compile Include="Weather.cs" />
   </ItemGroup>
   <ItemGroup>

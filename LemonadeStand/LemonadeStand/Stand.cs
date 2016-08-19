@@ -8,26 +8,30 @@ namespace LemonadeStand
 {
     class Stand
     {
+        public decimal bank = 20;
         string playerName;
-        public decimal bank;
         int maxPossiblePitchers;
         public int numberOfGlassesToBeSold;
         int numberOfActualPitchers = 0;
         List<Supply> supplyList = new List<Supply>();
-       
+        List<int> possiblePitchers = new List<int>();
 
-        public Stand(decimal bank)
+
+        public Stand()
         {
-            this.bank = bank;
             supplyList.Add(new Lemons());
             supplyList.Add(new Sugar());
             supplyList.Add(new Ice());
             supplyList.Add(new Cups());
         }
-        public void SetPossibleGlassesToBeSold()
+        public void SetUpStand()
         {
-            numberOfGlassesToBeSold = maxPossiblePitchers * 10;
+            BuyAllSupplies();
+            //more
         }
+        //
+        //player info//
+        //
         public void GivePlayerInfo()
         {
             Console.Clear();
@@ -35,54 +39,99 @@ namespace LemonadeStand
             Console.WriteLine("-----------------------------");
             MakeInventory();
             Console.WriteLine("\n");
-            Getbank();
+            GetBank();
             Console.WriteLine("-----------------------------");
         }
-
         public void SetName()
         {
             Console.WriteLine("Please enter player name:");
             this.playerName = Console.ReadLine();
+            Console.Clear();
         }
         public void GetTitle()
         {
-            Console.WriteLine("Welcome to " + GetName() + "'s Lemonade Stand!");
+            Console.WriteLine("Welcome to " + playerName + "'s Lemonade Stand!");
         }
-        public string GetName()
-        {
-            return playerName;
-        }
-
-        public void Getbank()
-        {
-            Console.WriteLine("Total bank: \t $" + bank);
-        }
+        //
+        //Inventory//-----------------------
+        //
         public void MakeInventory()
         {
             foreach (Supply supply in supplyList)
             {
-                supply.GetType();
+                supply.GetTypeAndTotalNumber();
             }
         }
-        public void GetPriceList()
+       
+        public void BuyAllSupplies()
+        {
+            CreatePriceList();
+            foreach (Supply supply in supplyList)
+            {
+                supply.HaveUserBuySupplies();
+                bank -= supply.costOfSupply;
+                if (bank > 0)
+                {
+                    Console.WriteLine("\t\t\t\t\t\tRemaining Funds: " + bank + "\n");
+                }
+                else
+                {
+                    bank += supply.costOfSupply;
+                    Console.WriteLine("\t\t\t\t\t\tYou do not have enough remaining funds. Please try again:\n");
+                    supply.HaveUserBuySupplies();
+                }
+            }
+        }
+        //
+        //Money Stuff//-------------------------
+        //
+        public void GetBank()
+        {
+            Console.WriteLine("Total bank: \t $" + bank);
+        }
+       
+        public void CreatePriceList()
         {
             Console.WriteLine("\nSupply Price List:\n");
-            Console.WriteLine("------------------------------------");
+            Console.WriteLine("\t------------------------------------");
             foreach (Supply supply in supplyList)
             {
                 supply.GetPrice();
             }
-            Console.WriteLine("------------------------------------");
-        }
-        List<int> possiblePitchers = new List<int>();
-        public void MakePossiblePitchersList()
+            Console.WriteLine("\t------------------------------------\n");
+        }    
+     
+        //
+        //Making Lemonade--------------------
+        //
+        public void FillPitchers()
         {
-            int pitchersBySupply;
+            SetNumberOfPitchersToMake();
+                while (CheckIfPitcherTotalIsCorrect())
+                {
+                    Console.WriteLine("The amount of pitchers you want to make won't work. Please try again.");
+                    SetNumberOfPitchersToMake();
+                }
+            MakeLemonade();       
+        }
+        public void MakeLemonade()
+        {
             foreach (Supply supply in supplyList)
             {
-                pitchersBySupply = Convert.ToInt32(Math.Floor(supply.GetTotalNumber() / supply.numberPerPitcher));
-                possiblePitchers.Add(pitchersBySupply);
+                for (int i = 0; i < numberOfActualPitchers; i++)
+                {
+                    supply.UseOneMeasureOfSupply();
+                }
             }
+        }
+        public void SetNumberOfPitchersToMake()
+        {
+            Console.WriteLine("How many pitchers would you like to make for today?");
+            numberOfActualPitchers = Convert.ToInt32(Console.ReadLine());
+        }
+        public bool CheckIfPitcherTotalIsCorrect()
+        {
+            return numberOfActualPitchers > maxPossiblePitchers;
         }
         public void SetPossiblePitchers()
         {
@@ -99,7 +148,7 @@ namespace LemonadeStand
                 }
                 else
                 {
-                   firstOption = maxPossiblePitchers;
+                    maxPossiblePitchers = firstOption;
                 }
             }
         }
@@ -107,69 +156,33 @@ namespace LemonadeStand
         {
             SetPossiblePitchers();
             SetPossibleGlassesToBeSold();
-            Console.WriteLine("You are able to make {0} pitchers, which makes {1} glases of lemonade.", maxPossiblePitchers, numberOfGlassesToBeSold);
+            Console.WriteLine("You are able to make {0} pitchers, which makes {1} glasses of lemonade.", maxPossiblePitchers, numberOfGlassesToBeSold);
         }
-        
-        public void BuyAllSupplies()
+        public void SetPossibleGlassesToBeSold()
         {
-            GetPriceList();
+            numberOfGlassesToBeSold = maxPossiblePitchers * 10;
+        }
+ 
+        public void MakePossiblePitchersList()
+        {
+            int pitchersBySupply;
             foreach (Supply supply in supplyList)
             {
-                supply.BuySupplies();
-                bank -= supply.costOfSupply;
-                if (bank > 0)
-                {
-                    Console.WriteLine("Remaining Funds: " + bank);
-                }
-                else
-                {
-                    bank += supply.costOfSupply;
-                    Console.WriteLine("You do not have enough remaining funds. Please try again:");
-                    supply.BuySupplies();                
-                } 
-             }
-        }
-        public void SetUpStand()
-        { 
-            BuyAllSupplies();
-            Console.WriteLine();
-            TellPlayerPossiblePitchers();
-        }
-        public void SetNumberOfPitchersToMake()
-        {
-            Console.WriteLine("How many pitchers would you like to make for today?");
-            numberOfActualPitchers = Convert.ToInt32(Console.ReadLine());
-        }
-        public bool CheckIfPitcherTotalIsCorrect()
-        {
-            return numberOfActualPitchers > maxPossiblePitchers;
-        }
-        public void MakeLemonade()
-        {
-            foreach (Supply supply in supplyList)
-            {
-                for (int i = 0; i <= numberOfActualPitchers; i++)
-                {
-                    supply.UseSupply();
-                }
+                pitchersBySupply = Convert.ToInt32(Math.Floor(supply.GetTotalNumber() / supply.numberPerPitcher));
+                possiblePitchers.Add(pitchersBySupply);
             }
         }
-        public void FillPitchers()
+        public void ShowRecipe()
         {
-            SetNumberOfPitchersToMake();
-                while (CheckIfPitcherTotalIsCorrect())
-                {
-                    Console.WriteLine("The amount of pitchers you want to make won't work. Please try again.");
-                    SetNumberOfPitchersToMake();
-                }
-            MakeLemonade();       
-
+            Console.WriteLine("Lemonade Recipe per Pitcher:");
+            Console.WriteLine("\t------------------------------------");
+            foreach (Supply supply in supplyList)
+            {
+                Console.WriteLine("\t" + supply.type + " : \t\t{0}", supply.numberPerPitcher);
+            }
+            Console.WriteLine("\t------------------------------------\n");
         }
-        
-}
-
-
-
+    }
 }
     
 

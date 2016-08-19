@@ -17,7 +17,7 @@ namespace LemonadeStand
         }
         public override void GetPrice()
         {
-            Console.WriteLine("price per cup of sugar:\t\t $" + price);
+            Console.WriteLine("\tprice per cup of sugar:\t\t\t $" + price);
         }
     }
 }

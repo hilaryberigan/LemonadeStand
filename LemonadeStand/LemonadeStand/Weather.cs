@@ -22,7 +22,20 @@ namespace LemonadeStand
             SetActualSkyType();
             SetActualTemperature();
         }
-
+        //
+        //forecast
+        //
+        public void SetWeatherForecast()
+        {
+            SetTemperatureForecast();
+            SetSkyTypeForecast();
+        }
+        public void GetWeatherForecast()
+        {
+            Console.WriteLine("\nToday's weather forecast: \n");
+            Console.WriteLine("\t" + GetSkyTypeForecast());
+            Console.WriteLine("\t" + GettemperatureForecast() + "° F\n");
+        }
         public void SetTemperatureForecast()
         {
             temperature = random.Next(50, 95);
@@ -46,7 +59,20 @@ namespace LemonadeStand
         {
            return skyType;
         }
-
+        //
+        //actual weather
+        //
+        public void SetActualWeather()
+        {
+           SetActualTemperature();
+           SetActualSkyType();
+        }
+        public void GetActualWeather()
+        {
+            Console.WriteLine("Today's weather was: \n");
+            Console.WriteLine("\t" + GetActualSkyType());
+            Console.WriteLine("\t" + GetActualTemperature() + "° F\n");
+        }
         public void SetActualSkyType()
         {
             if (random.Next(100) < 20)
@@ -83,9 +109,6 @@ namespace LemonadeStand
         {
             return actualtemperature;
         }
-
     }
-            
-
-        }
+}
 

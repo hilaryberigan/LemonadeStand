@@ -24,23 +24,19 @@ namespace LemonadeStand
             weatherIndicator = 0;
             SetPreferences(price, weather.GetActualTemperature(), weather.GetActualSkyType());
         }
-  
+        //
+        //SetPreferences
+        //
         public void SetPersonalThirst(int actualTemperature)
         {
             personalThirst = personalThirst + (maxTemperature / actualTemperature);
         }
-        public void SetPreferences(decimal price, int actualTemperature, string actualSkyType)
-        {
-            SetWillPay(actualTemperature, price);
-            SetWeatherIndicator(actualSkyType);
-            SetPersonalThirst(actualTemperature);
-            GetDecision();
-        }
+
         public void SetWillPay(int actualTemperature, decimal price)
         {
             int minPriceWillingToPay = random.Next(1, 5);
             priceWillingToPay = ((decimal)actualTemperature / (decimal)maxTemperature) * (decimal)minPriceWillingToPay;
-           
+
 
             if (priceWillingToPay >= price)
             {
@@ -54,10 +50,10 @@ namespace LemonadeStand
         }
         public void SetWeatherIndicator(string actualSkyType)
         {
-            
+
             if (actualSkyType == "sunny")
             {
-               weatherIndicator = weatherIndicator + 60;
+                weatherIndicator = weatherIndicator + 60;
             }
             if (actualSkyType == "cloudy")
             {
@@ -68,7 +64,16 @@ namespace LemonadeStand
                 weatherIndicator = weatherIndicator + 20;
             }
         }
-
+        public void SetPreferences(decimal price, int actualTemperature, string actualSkyType)
+        {
+            SetWillPay(actualTemperature, price);
+            SetWeatherIndicator(actualSkyType);
+            SetPersonalThirst(actualTemperature);
+            GetDecision();
+        }
+        //
+        //decision
+        //
         public decimal SetThreshold()
         {
             if (willPay == true)
@@ -89,10 +94,8 @@ namespace LemonadeStand
             {
                 wantsGlass = true;
             }
-            
-        }
-       
-        
         }
     }
+}
+    
 
