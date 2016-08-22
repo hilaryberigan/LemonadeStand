@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LemonadeStand
+namespace LemonadeStandddd
 {
+
     class Customer
     {
         int personalThirst;

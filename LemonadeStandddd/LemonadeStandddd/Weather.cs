@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LemonadeStand
+namespace LemonadeStandddd
 {
     public class Weather
     {
@@ -30,7 +30,7 @@ namespace LemonadeStand
             SetTemperatureForecast();
             SetSkyTypeForecast();
         }
-
+        
         public void SetTemperatureForecast()
         {
             temperature = random.Next(50, 95);
@@ -47,6 +47,7 @@ namespace LemonadeStand
             skyTypes.Add("cloudy");
             skyTypes.Add("sunny");
 
+
             skyType = skyTypes[random.Next(0, 2)];
         }
         public string GetSkyTypeForecast()
@@ -61,7 +62,7 @@ namespace LemonadeStand
             SetActualTemperature();
             SetActualSkyType();
         }
-
+        
         public void SetActualSkyType()
         {
             if (random.Next(100) < 20)

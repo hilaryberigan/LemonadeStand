@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LemonadeStand
+namespace LemonadeStandddd
 {
     public class Game
     {
@@ -20,31 +20,21 @@ namespace LemonadeStand
         }
         public void RunGame()
         {
-           
+            if (gameOn)
             {
-                int dayCount = 1;
                 for (int i = 0; i < maxDays; i++)
                 {
-                    if (gameOn)
-                    {
-                        Day day = new Day();
-                        days.Add(day);
-
-                        player.DisplayDailyFactors(day);
-                        player.MakeDailyChoices(day);
-                        player.SetUpStand(day);
-                        player.RunStand(day);
-                        dayCount++;
-                        Console.WriteLine("Day " + dayCount + "\n");
-                        player.SetUpStandForNewDay();
-                        CheckIfGameOn();
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    Day day = new Day();
+                    days.Add(day);
+                    player.DisplayDailyFactors(day);
+                    player.MakeDailyChoices(day);
+                    player.SetUpStand(day);
+                    player.RunStand(day);
+                    CheckIfGameOn();
                 }
-                DisplayGameOver();            } 
+
+                
+            }
         }
 
         public void DisplayGameOver()
@@ -71,16 +61,16 @@ namespace LemonadeStand
             Console.WriteLine("\t4. Try different prices depending on conditions.");
             Console.WriteLine("\nAt the end of each day, you will see how much money you made. With your new bank, buy supplies for the next day. Ice will melt each night, so you must buy new ice each day.");
             Console.WriteLine("\nAt the end of the week, you win if you have a made a profit.");
-            Console.WriteLine("\n\n\nPress {Enter} when you're ready to play.");
+            Console.WriteLine("\n\n\nPress {Enter} when you're ready to play."); 
             Console.ReadLine();
             Console.Clear();
 
         }
         public void CheckIfGameOn()
         {
-            if (player.CheckIfPlayerHasMoney() == false)
+            if (player.CheckIfPlayerHasMoney())
             {
-                gameOn = false;
+                gameOn = true;
             }
         }
 

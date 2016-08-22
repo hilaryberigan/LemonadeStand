@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LemonadeStand
+namespace LemonadeStandddd
 {
     public class Supply
     {
@@ -43,10 +43,6 @@ namespace LemonadeStand
         {
             return this.totalNumberOfSupply;
         }
-        public decimal GetCostOfSupply()
-        {
-            return costOfSupply;
-        }
         public virtual void SetTotalCostOfSupply()
         {
             costOfSupply = numberOfSupplyBought * price;
@@ -54,43 +50,29 @@ namespace LemonadeStand
         //
         //User Interaction with supplies
         //
-        public void BuySupplies(Bank bank)
+        public void BuySupplies()
         {
+            
             SetSupplyTotals();
-            SetTotalCostOfSupply();
-            PayForSupplies(bank);
+            if (totalNumberOfSupply < numberOfSupplyPerPitcher)
+            {
+                Console.WriteLine("\nI'm sorry, that will not be enough to make even one pitcher. \nHow many " + GetMeasure() + " do you want to buy?");
+                SetSupplyTotals();
+                SetTotalCostOfSupply();
+            }
+            else
+            {
+                SetTotalCostOfSupply();
+            }
         }
-        public void PayForSupplies(Bank bank)
+        public decimal GetCostOfSupply()
         {
-            decimal supplyCost = GetCostOfSupply();
-            bank.SubtractFromDollarTotal(supplyCost);
-
-            if (bank.GetDollarTotal() < 0)
-                { 
-                    bank.AddToDollarTotal(supplyCost);
-                    Console.WriteLine("\t\t\tYou do not have enough remaining funds. Please try again:\n");
-                    ResetNumberOfSupplyBought();
-                    BuySupplies(bank);
-                }
-
-            bank.DisplayFunds();
-        }
-        public virtual void ResetNumberOfSupplyBought()
-        {
-            this.totalNumberOfSupply = this.totalNumberOfSupply - numberOfSupplyBought;        
+            return costOfSupply;
         }
         public virtual void SetSupplyTotals()
         {
             Console.WriteLine("\nHow many " + GetMeasure() + " do you want to buy?");
-            string input = Console.ReadLine();
-            if (string.IsNullOrEmpty(input))
-            {
-                numberOfSupplyBought = 0;
-            }
-            else
-            {
-                numberOfSupplyBought = Convert.ToInt32(input); 
-            }
+            numberOfSupplyBought = Convert.ToInt32(Console.ReadLine());
             this.totalNumberOfSupply = this.totalNumberOfSupply + numberOfSupplyBought;
         }
         public void UseOneMeasureOfSupply()

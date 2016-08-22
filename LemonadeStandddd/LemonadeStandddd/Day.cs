@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LemonadeStand
+namespace LemonadeStandddd
 {
+
     public class Day
     {
-       
+        int dayNumber = 0;
         public Weather weather;
-        int maxPossibleCustomers = 45;
+        int maxCustomersInDay = 45;
         decimal cupPriceForDay = 0;
         int numberGlassesBoughtInDay = 0;
         List<Customer> customers = new List<Customer>();
@@ -23,11 +24,12 @@ namespace LemonadeStand
             weather.SetWeatherForecast();
             weather.SetActualWeather();
             SetMaxCustomers();
+            dayNumber++;
         }
-        
+       
         public void DisplayWeatherForecast()
         {
-            Console.WriteLine("\nToday's weather forecast: \n");
+            Console.WriteLine("Today's weather forecast: \n");
             Console.WriteLine("\t" + weather.GetSkyTypeForecast());
             Console.WriteLine("\t" + weather.GettemperatureForecast() + "° F\n");
         }
@@ -46,23 +48,17 @@ namespace LemonadeStand
         public int SetMaxCustomers()
         {
             int actualtemperature = weather.GetActualTemperature();
-            if (weather.GetActualSkyType() == "rainy")
-            {
-                maxPossibleCustomers -= 15;
-            }
-            maxPossibleCustomers = maxPossibleCustomers + ((actualtemperature - maxPossibleCustomers) * 2);
-            return maxPossibleCustomers; 
+            maxCustomersInDay = maxCustomersInDay + ((actualtemperature - maxCustomersInDay) * 2);
+            return maxCustomersInDay; //add something with skytype
         }
         public void SetCupPrice()
         {
-            Console.WriteLine("------------------------------------");
-            Console.WriteLine("Choose the price per glass...\n");
-            Console.WriteLine("How much would you like each glass of lemonade to cost? Choose any $ amount.");
+            Console.WriteLine("How much would you like each glass of lemonade to cost?");
             cupPriceForDay = Convert.ToDecimal(Console.ReadLine());
         }
         public int GetMaxCustomers()
         {
-            return maxPossibleCustomers;
+            return maxCustomersInDay;
         }
         public decimal GetCupPrice()
         {
@@ -70,7 +66,7 @@ namespace LemonadeStand
         }
         public void MakeCustomers()
         {
-            for (int i = 0; i < maxPossibleCustomers; i++)
+            for (int i = 0; i < maxCustomersInDay; i++)
             {
                 Customer customer = new Customer(weather, cupPriceForDay);
                 customers.Add(customer);
@@ -87,7 +83,7 @@ namespace LemonadeStand
                     numberGlassesBoughtInDay++;
                     inventory.numberOfGlassesToBeSold--;
                     bank.AddOneCupEarned(cupPriceForDay);
-
+                    
                 }
                 else if (customer.wantsGlass == false)
                 {
@@ -103,7 +99,7 @@ namespace LemonadeStand
         {
             return numberGlassesBoughtInDay;
         }
-
+        
     }
 }
 
