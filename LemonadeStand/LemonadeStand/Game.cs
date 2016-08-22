@@ -10,7 +10,7 @@ namespace LemonadeStand
     public class Game
     {
         Player player = new Player();
-        int maxDays = 3;
+        int maxDays = 7;
         List<Day> days = new List<Day>();
         bool gameOn = true;
         public Game()
